@@ -24,7 +24,7 @@ func (cf *ConfigFiles) ReadFiles() error {
 		}
 	}
 
-	cf.CreateFile(cf.defaultConfigFile)
+	cf.CreateDefaultFile(cf.defaultConfigFile)
 
 	files, err := os.ReadDir(cf.configPath)
 
@@ -56,7 +56,7 @@ func (cf *ConfigFiles) VerifyDir(confiDir string) bool {
 	return true
 }
 
-func (cf *ConfigFiles) CreateFile(filePath string) error {
+func (cf *ConfigFiles) CreateDefaultFile(filePath string) error {
 	err := exec.Command("touch", filePath).Run()
 
 	if err != nil {

@@ -1,16 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"os"
+)
 
 func main() {
+
 	var conf *ConfigFiles = CreateFileManager()
-  err := conf.Init()
+	err := conf.Init()
 
- 
-  if err != nil {
-    handler := CreateErrorHandler(err);
-    handler.ShowError();
-  }
+	if err != nil {
+		handler := CreateErrorHandler(err)
+		handler.ShowError()
+	}
 
-  fmt.Println(conf.files)
+
+	var cmdParse CommandParser = CreateCommandParser(os.Args)
+  
+  var cmd *Commands = CreateCommands(&cmdParse, conf)
+
+  cmd.ExecCommand();
+
 }
+
+
